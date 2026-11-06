@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTS Pemrograman Lanjut - AstraW 2411010108</title>
+    <style>
+        /* CSS Reset & General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #ffffff;
+        }
+
+        /* 1. Header */
+        header {
+            background-color: #00bcd4; /* Warna cyan/biru muda */
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 12px;
+        }
+
+        /* 2. Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .container h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .btn-hitung {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            font-size: 11px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .btn-hitung:hover {
+            background-color: #0056b3;
+        }
+
+        .hasil-box {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            display: none;
+        }
+
+        /* 3. Footer */
+        footer {
+            background-color: #00bcd4;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">My App UTS AstraW 2411010108</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <div class="container">
+            <h2>Operasi Matematika dengan JavaScript</h2>
+            
+            <div class="form-group">
+                <label for="angka1">Angka Pertama</label>
+                <input type="number" id="angka1" placeholder="">
+            </div>
+
+            <div class="form-group">
+                <label for="angka2">Angka Kedua</label>
+                <input type="number" id="angka2" placeholder="">
+            </div>
+
+            <div class="form-group">
+                <label for="operasi">Operasi</label>
+                <select id="operasi">
+                    <option value="penjumlahan">Penjumlahan (+)</option>
+                    <option value="pengurangan">Pengurangan (-)</option>
+                    <option value="perkalian">Perkalian (×)</option>
+                    <option value="pembagian">Pembagian (÷)</option>
+                </select>
+            </div>
+
+            <button class="btn-hitung" onclick="hitung()">Hitung</button>
+
+            <!-- Tempat Menampilkan Hasil -->
+            <div id="hasilBox" class="hasil-box"></div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        &copy; 2026 My App AstraW 2411010108. All Rights Reserved.
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        function hitung() {
+            const num1 = parseFloat(document.getElementById('angka1').value);
+            const num2 = parseFloat(document.getElementById('angka2').value);
+            const operasi = document.getElementById('operasi').value;
+            const hasilBox = document.getElementById('hasilBox');
+
+            if (isNaN(num1) || isNaN(num2)) {
+                hasilBox.style.display = 'block';
+                hasilBox.style.color = 'red';
+                hasilBox.innerHTML = 'Harap masukkan kedua angka!';
+                return;
+            }
+
+            let hasil = 0;
+
+            switch (operasi) {
+                case 'penjumlahan':
+                    hasil = num1 + num2;
+                    break;
+                case 'pengurangan':
+                    hasil = num1 - num2;
+                    break;
+                case 'perkalian':
+                    hasil = num1 * num2;
+                    break;
+                case 'pembagian':
+                    if (num2 === 0) {
+                        hasilBox.style.display = 'block';
+                        hasilBox.style.color = 'red';
+                        hasilBox.innerHTML = 'Pembagian dengan nol tidak diperbolehkan!';
+                        return;
+                    }
+                    hasil = num1 / num2;
+                    break;
+            }
+
+            hasilBox.style.display = 'block';
+            hasilBox.style.color = '#333';
+            hasilBox.innerHTML = `Hasil: ${hasil}`;
+        }
+    </script>
+</body>
+</html>
